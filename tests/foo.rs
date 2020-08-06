@@ -2,8 +2,10 @@
 fn the_test()
 {
     let value = env!("CARGO_BIN_EXE_cargo-env");
-    println!("dap: {}", value);
+    println!("compile-time: CARGO_BIN_EXE_cargo-env: {}", value);
     for (key, value) in std::env::vars() {
-        println!("{}: {}", key, value);
+        if key.starts_with("CARGO_") {
+            println!("runtime: {}: {}", key, value);
+        }
     }
 }
